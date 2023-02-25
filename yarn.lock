@@ -303,6 +303,13 @@
   resolved "https://registry.yarnpkg.com/@codrjs/health/-/health-1.0.2.tgz#8469df38f900a6629697085acf07a1b343908d2e"
   integrity sha512-QV8rMvJet6pPf3GKATcmibIjhGYxfHi5WkYopQMQGGe3tHtOT92ytu3DPQfNw58bm36ZfdqGXmn9GHeo43HrSw==
 
+"@codrjs/logger@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@codrjs/logger/-/logger-1.0.0.tgz#eb688d33e76b1bd8083fa8eb6a476e93794194d2"
+  integrity sha512-dqKxUGvguxWKP47K61YAHL9wWhRMl2J16fmCZT9TTZ3uNdwkWoH9DmZAtSIK5cz88gPFpPwWduCun9+vwMLSAw==
+  dependencies:
+    winston "^3.8.2"
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.5.0.tgz#bb504579c1cae923e6576a4f5da43d25f97bdbd9"

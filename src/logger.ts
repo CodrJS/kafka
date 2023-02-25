@@ -1,5 +1,8 @@
-import { LoggerEntryContent, logLevel } from "kafkajs";
-import winston, { transports, format } from "winston";
+/**
+ * A customer Kafka to Codr log converter
+ */
+import { LogEntry, logLevel } from "kafkajs";
+import Logger, { transports } from "@codrjs/logger";
 
 const toWinstonLogLevel = (level: logLevel) => {
   switch (level) {
@@ -15,30 +18,22 @@ const toWinstonLogLevel = (level: logLevel) => {
   }
 };
 
-const WinstonLogCreator = (logLevel: logLevel) => {
-  const logger = winston.createLogger({
-    level: toWinstonLogLevel(logLevel),
-    format: format.printf(({ message, label, timestamp }) => {
-      return `${timestamp} [${label}] ${message}`;
-    }),
-    transports: [
-      new transports.Console(),
-      new transports.File({ filename: "logs/error.log", level: "error" }),
-      new transports.File({ filename: "logs/service.log" }),
-    ],
-  });
+const logger = Logger.add("Kafka Client", [
+  new transports.File({
+    filename: "logs/kafka/all.log",
+  }),
+  new transports.File({
+    filename: "logs/kafka/debug.log",
+    level: "debug",
+  }),
+  new transports.File({
+    filename: "logs/kafka/error.log",
+    level: "error",
+  }),
+]);
 
-  return ({
-    namespace,
-    level,
-    label,
-    log,
-  }: {
-    namespace: string;
-    level: logLevel;
-    label: string;
-    log: LoggerEntryContent;
-  }) => {
+const WinstonLogCreator = () => {
+  return ({ namespace, level, label, log }: LogEntry) => {
     const { message, ...extra } = log;
     logger.log({
       level: toWinstonLogLevel(level),
@@ -49,4 +44,4 @@ const WinstonLogCreator = (logLevel: logLevel) => {
   };
 };
 
-export const logger = WinstonLogCreator;
+export const logCreator = WinstonLogCreator;
