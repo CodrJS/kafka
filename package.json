@@ -1,6 +1,6 @@
 {
   "name": "@codrjs/kafka",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module that simplifies the implementation of KafkaJS into CodrJS services.",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
